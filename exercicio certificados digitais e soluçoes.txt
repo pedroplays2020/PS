@@ -1,0 +1,189 @@
+certificados digitais exercio parte 1
+ 1. Criar uma chave privada com
+• 1024 bits
+• Encriptação DES3
+• Password 1234
+• Nome do ficheiro: my.key
+
+openssl genrsa -des3 -out my.key 1024
+
+Enter pass phrase for my.key:1234
+verifying-Enter pass phrase for my.key:1234
+
+2.Criar um certificado
+• Usando essa chave
+• 10 anos de validade
+• Nome do ficheiro: my.crt
+• Restantes parâmetros ao seu
+gosto
+openssl req -x509 -key my.key -days 3650 -out my.crt
+
+enable to load config info from /usr/local/ssl/openssl.cnf
+enter pass phrase form my.key: 1234
+___________________________________________________________
+
+
+certificados digitais exercio parte 2
+
+1. Criar uma chave privada com
+• 2048 bits
+• Encriptação AES com 192 bits
+• Password 5678
+• Nome do ficheiro: srv.key
+
+openssl genrsa -aes192 -out srv.key 2048
+
+C:\Users\pedro\Desktop\Pratica> openssl genrsa -aes192 -out srv.key 2048
+Loading 'screen' into random state - done
+Generating RSA private key, 2048 bit long modulus
+....................................................................................+++
+............+++
+e is 65537 (0x10001)
+Enter pass phrase for srv.key:5678
+Verifying - Enter pass phrase for srv.key:5678
+
+2. Criar uma requisição para poder
+pedir um certificado a uma
+entidade certificadora
+• Usando a chave srv.key
+• Nome do ficheiro: srv.csr
+
+openssl req -new -key srv.key -out srv.csr
+Unable to load config info from /usr/local/ssl/openssl.cnf
+
+3. “Fingir” que é a entidade
+certificadora e gerar o certificado
+pedido
+• Usando a chave my.key
+• Usando o certificado my.crt
+• Usando o ficheiro da requisição
+• 1 ano de validade
+• Nº de série: 20180611
+• Ficheiro gerado: srv.crt
+
+openssl x509 -req -days 365 -in srv.csr -CA my.crt -CAkey my.key -set_serial
+20180611 -out srv.crt - erro 
+
+-----------------------------------------------------------------------------
+ Encriptação do disco exercicios 
+
+C:\WINDOWS\system32> cd C:\Users\pedro\OneDrive\ISTEC\1º ano\PS\x
+
+C:\Users\pedro\OneDrive\ISTEC\1º ano\PS\x> md 1
+
+C:\Users\pedro\OneDrive\ISTEC\1º ano\PS\x>md p1
+
+C:\Users\pedro\OneDrive\ISTEC\1º ano\PS\x>
+C:\Users\pedro\OneDrive\ISTEC\1º ano\PS\x> cd C\Users\pedro\OneDrive\ISTEC\1º\PS\x\p1
+O sistema não conseguiu localizar o caminho especificado.
+
+C:\Users\pedro\OneDrive\ISTEC\1º ano\PS\x>cd C:\Users\pedro\OneDrive\ISTEC\1º ano\PS\x\p1
+
+C:\Users\pedro\OneDrive\ISTEC\1º ano\PS\x\p1> dir teste.txt copy
+ Volume in drive C is OS
+ Volume Serial Number is 7AF2-77E7
+
+ Directory of C:\Users\pedro\OneDrive\ISTEC\1º ano\PS\x\p1
+
+
+ Directory of C:\Users\pedro\OneDrive\ISTEC\1º ano\PS\x\p1
+
+File Not Found
+
+C:\Users\pedro\OneDrive\ISTEC\1º ano\PS\x\p1>dir
+ Volume in drive C is OS
+ Volume Serial Number is 7AF2-77E7
+
+ Directory of C:\Users\pedro\OneDrive\ISTEC\1º ano\PS\x\p1
+
+29/06/2018  17:14    <DIR>          .
+29/06/2018  17:14    <DIR>          ..
+               0 File(s)              0 bytes
+               2 Dir(s)  75 620 016 128 bytes free
+
+C:\Users\pedro\OneDrive\ISTEC\1º ano\PS\x\p1>cd ..
+
+C:\Users\pedro\OneDrive\ISTEC\1º ano\PS\x>dir
+ Volume in drive C is OS
+ Volume Serial Number is 7AF2-77E7
+
+ Directory of C:\Users\pedro\OneDrive\ISTEC\1º ano\PS\x
+
+29/06/2018  17:14    <DIR>          .
+29/06/2018  17:14    <DIR>          ..
+29/06/2018  17:14    <DIR>          p1
+               0 File(s)              0 bytes
+               3 Dir(s)  75 539 841 024 bytes free
+
+C:\Users\pedro\OneDrive\ISTEC\1º ano\PS\x>copy con p1\teste.txt
+batata^Z
+        1 file(s) copied.
+
+C:\Users\pedro\OneDrive\ISTEC\1º ano\PS\x>
+C:\Users\pedro> cd C:\Users\pedro\OneDrive\ISTEC\1º ano\PS\x
+
+C:\Users\pedro\OneDrive\ISTEC\1º ano\PS\x> cipher  /e /s:p1
+
+ Setting the directory p1 to encrypt new files [OK]
+
+ Encrypting files in C:\Users\pedro\OneDrive\ISTEC\1º ano\PS\x\p1\
+
+teste.txt           [OK]
+
+2 file(s) [or directorie(s)] within 2 directorie(s) were encrypted.
+
+Converting files from plaintext to ciphertext may leave sections of old
+plaintext on the disk volume(s). It is recommended to use command
+CIPHER /W:directory to clean up the disk after all converting is done.
+
+C:\Users\pedro\OneDrive\ISTEC\1º ano\PS\x> cipker /k
+'cipker' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\pedro\OneDrive\ISTEC\1º ano\PS\x> cipher /k
+
+EFS certificate thumbprint for computer PC-GAMING:
+
+  EA23 AA80 0D19 1389 10ED 4B8E 2C1A 3BB1 98DF 1092
+
+
+C:\Users\pedro\OneDrive\ISTEC\1º ano\PS\x>dir
+ Volume in drive C is OS
+ Volume Serial Number is 7AF2-77E7
+
+ Directory of C:\Users\pedro\OneDrive\ISTEC\1º ano\PS\x
+
+29/06/2018  17:14    <DIR>          .
+29/06/2018  17:14    <DIR>          ..
+29/06/2018  17:37    <DIR>          p1
+               0 File(s)              0 bytes
+               3 Dir(s)  61 528 932 352 bytes free
+
+C:\Users\pedro\OneDrive\ISTEC\1º ano\PS\x>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
